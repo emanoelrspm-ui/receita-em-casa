@@ -11,9 +11,9 @@ export async function generateRecipes(
     body: JSON.stringify({ ingredients, meal, extras }),
   });
 
-  const payload = await response.json().catch(() => ({}));
+  const payload: any = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(payload.error || "Não foi possível gerar as receitas.");
+    throw new Error((payload as { error?: string })?.error || "Não foi possível gerar as receitas.");
   }
   return payload as RecipeResponse;
 }

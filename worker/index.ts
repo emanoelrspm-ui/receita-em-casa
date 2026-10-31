@@ -7,7 +7,7 @@ type Recipe = {
   id: string; title: string; description: string; timeMinutes: number;
   difficulty: "Fácil" | "Médio" | "Difícil"; servings: number;
   ingredients: { name: string; quantity: string; available: boolean }[];
-  steps: string[]; imagePrompt: string; tips?: string;
+  steps: string[]; image?: string; imagePrompt: string; tips?: string;
 };
 
 const TEXT_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
@@ -109,7 +109,7 @@ Priorize usar os ingredientes disponíveis. Marque available=true somente para i
 
   const recipes = parsed.recipes.slice(0, 3).map(normalizeRecipe);
   // Cada imagem é gerada separadamente. Se a geração falhar, a receita continua disponível.
-  const withImages = await Promise.all(recipes.map(async (recipe) => {
+  const withImages = await Promise.all(recipes.map(async (recipe: Recipe) => {
     try {
       const generated: any = await env.AI.run(IMAGE_MODEL, {
         prompt: `${recipe.imagePrompt}. Editorial food photography, appetizing freshly cooked dish, natural window light, premium restaurant plating, 4:3 composition. No text, no watermark.`,
