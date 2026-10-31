@@ -94,7 +94,17 @@ export default function App() {
 
         {selected && <section className="detail-section" id="recipe-detail"><button className="back-button" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Voltar às opções</button><div className="detail-card"><div className="detail-photo"><img src={selected.image || `https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=85`} alt={selected.title}/></div><div className="detail-body"><span className="step-label">SUA PRÓXIMA AVENTURA CULINÁRIA</span><h2>{selected.title}</h2><p>{selected.description}</p><div className="detail-stats"><span><Clock3/> {selected.timeMinutes} minutos</span><span><Users/> {selected.servings} porções</span><span><Flame/> {selected.difficulty}</span></div><div className="detail-columns"><div><h3><Utensils size={18}/> Ingredientes</h3><ul className="ingredient-detail">{selected.ingredients.map((item) => <li key={item.name}><span>{item.name}{!item.available && <small> · extra</small>}</span><strong>{item.quantity}</strong></li>)}</ul></div><div><h3><ChefHat size={18}/> Modo de preparo</h3><ol className="steps-list">{selected.steps.map((step,index) => <li key={index}><span>{index+1}</span>{step}</li>)}</ol></div></div>{selected.tips && <p className="tip-box">Dica do chef: {selected.tips}</p>}</div></div></section>}
       </main>
-      <footer><a className="brand footer-brand" href="#"><span className="brand-mark"><ChefHat size={19}/></span><span>receita<span className="brand-light">em casa</span></span></a><span>Feito com carinho e uma pitada de inteligência artificial.</span><span>© 2026 Receita em Casa</span></footer>
+      <footer>
+        <a className="brand footer-brand" href="#">
+          <span className="brand-mark"><ChefHat size={19}/></span>
+          <span>receita<span className="brand-light">em casa</span></span>
+        </a>
+        <div className="footer-copy">
+          <div>Feito com carinho e uma pitada de inteligência artificial.</div>
+          <div className="footer-author">Desenvolvido por Emanoel R. Santorsola</div>
+          <div>© 2026 Receita em Casa</div>
+        </div>
+      </footer>
     </div>
   );
 }
